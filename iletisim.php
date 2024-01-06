@@ -27,7 +27,7 @@ include 'php/navbar.php';
     </div>
 </div>
 
-<form action="php/iletisimsql.php" method="post" class="contact-form form">
+<form action="php/iletisimmail.php" method="post" class="contact-form form">
     <div class="form-group">
         <label for="ad">Adınız:</label><br>
         <input type="text" id="ad" name="ad" required>
