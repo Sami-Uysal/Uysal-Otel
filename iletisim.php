@@ -48,5 +48,30 @@ include 'php/navbar.php';
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="js/javascript.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('.contact-form');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var formData = new FormData(form);
+
+            fetch('php/iletisimsql.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (data) {
+                // Popup ile sonucu göster
+                alert(data);
+            })
+            .catch(function (error) {
+                console.error('Hata:', error);
+            });
+        });
+    });
+</script>
+
 </html>
