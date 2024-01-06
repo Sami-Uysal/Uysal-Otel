@@ -22,7 +22,7 @@ include 'php/navbar.php';
 <div class="container mb-3">
     <div class="row">
         <div class="bg-white shadow rounded">
-            <h1 class="text-center mt-5 mb-5 h-font">Bizimle İletişime Geçin</h1>
+            <h1 class="text-center mt-5 mb-5 ">Bizimle İletişime Geçin</h1>
         </div>
     </div>
 </div>

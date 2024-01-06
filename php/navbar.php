@@ -14,7 +14,7 @@
                     <a class="nav-link <?php if($currentPage === 'odalar') echo 'active'; ?> me-2" <?php if($currentPage === 'odalar') echo 'aria-current="page"'; ?> href="odalar.php">Odalar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($currentPage === 'iletisim') echo 'active'; ?> me-2" <?php if($currentPage === 'iletisim') echo 'aria-current="page"'; ?> href="iletisim.php">Bizimle İletişime Geç</a>
+                    <a class="nav-link <?php if($currentPage === 'iletisim') echo 'active'; ?> me-2" <?php if($currentPage === 'iletisim') echo 'aria-current="page"'; ?> href="iletisim.php">İletişim</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php if($currentPage === 'hakkimizda') echo 'active'; ?> me-2" <?php if($currentPage === 'hakkimizda') echo 'aria-current="page"'; ?> href="hakkimizda.php">Hakkımızda</a>
