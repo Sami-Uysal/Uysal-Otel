@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>İletişim Formu</title>
+</head>
+<body>
+
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ad = $_POST['ad'];
@@ -19,3 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
+
+</body>
+</html>
