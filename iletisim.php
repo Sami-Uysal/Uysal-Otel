@@ -56,7 +56,7 @@ include 'php/navbar.php';
             event.preventDefault();
             var formData = new FormData(form);
 
-            fetch('php/iletisimsql.php', {
+            fetch('php/iletisimmail.php', {
                 method: 'POST',
                 body: formData
             })
