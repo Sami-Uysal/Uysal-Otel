@@ -37,7 +37,7 @@
 <div class="modal fade" id="girisModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="giris.php">
+            <form action="../Project/php/giris.php" method="POST">
                 <div class="modal-header ">
                     <h5 class="modal-title d-flex align-items-center">
                         <i class="bi bi-person fs-3 me-2 "></i> Giriş
@@ -47,11 +47,11 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">E-mail</label>
-                        <input type="email" class="form-control shadow-none">
+                        <input name="email" type="email" class="form-control shadow-none">
                     </div>
                     <div class="mb-4">
                         <label class="form-label">Şifre</label>
-                        <input type="password" class="form-control shadow-none">
+                        <input name="sifre" type="password" class="form-control shadow-none">
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <button type="submit" class="btn btn-dark shadow-none">Giriş Yap</button>
@@ -66,7 +66,7 @@
 <div class="modal fade"id="kayitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="kayit.php" >
+            <form action="../Project/php/kayit.php" method="POST" >
                 <div class="modal-header ">
                     <h5 class="modal-title d-flex align-items-center">
                         <i class="bi bi-person-add fs-3 me-2"></i>Kayıt
@@ -81,11 +81,11 @@
                     <div class="row">
                         <div class="col-md-6 ps-0 mb-3">
                             <label class="form-label">Ad</label>
-                            <input id="ad" type="text" class="form-control shadow-none">
+                            <input name="ad" type="text" class="form-control shadow-none">
                         </div>
                         <div class="col-md-6 ps-0 mb-3">
                             <label class="form-label">E-mail</label>
-                            <input id="email" type="email" class="form-control shadow-none">
+                            <input name="email" type="email" class="form-control shadow-none">
                         </div>
                         <div class="col-md-6 ps-0 mb-3">
                             <label class="form-label ">Telefon</label><br>
@@ -93,33 +93,32 @@
                         </div>
                         <div class="col-md-6 ps-0 mb-3">
                             <label class="form-label">Profil Resmi</label>
-                            <input type="file" class="form-control shadow-none">
+                            <input name="resim" type="file" class="form-control shadow-none">
                         </div>
                         <div class="col-md-12 ps-0 mb-3">
                             <label class="form-label">Adres</label>
-                            <textarea class="form-control" rows="1"></textarea>
+                            <textarea name="adres" class="form-control" rows="1"></textarea>
                         </div>
                         <div class="col-md-6 ps-0 mb-3">
                             <label class="form-label ">Zip Kodu</label><br>
-                            <input type="number" class="form-control shadow-none"/>
+                            <input name="zip_kodu" type="number" class="form-control shadow-none"/>
                         </div>
                         <div class="col-md-6 ps-0 mb-3">
                             <label class="form-label">Doğum Tarihi</label>
-                            <input type="date" class="form-control shadow-none">
+                            <input name="dogum_gunu" type="date" class="form-control shadow-none">
                         </div>
                         <div class="col-md-6 ps-0 mb-3">
                             <label class="form-label ">Şifre</label><br>
-                            <input type="password" class="form-control shadow-none"/>
+                            <input name="sifre"type="password" class="form-control shadow-none"/>
                         </div>
                         <div class="col-md-6 ps-0 mb-3">
                             <label class="form-label ">Şifreyi Doğrula</label><br>
-                            <input type="password" class="form-control shadow-none"/>
-                        </div>
-                                                        
+                            <input name="sifre_dogrula" type="password" class="form-control shadow-none"/>
+                        </div>                                                      
                     </div>
                 </div>
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <button type="submit" class="btn btn-dark shadow-none">Giriş Yap</button>
+                        <button type="submit" class="btn btn-dark shadow-none">Kayıt Ol</button>
                     </div>
                 </div>
             </form>
