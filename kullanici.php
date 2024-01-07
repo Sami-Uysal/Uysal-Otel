@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 <?php
-session_start();
-
+session_commit();
 $email = $_SESSION['email'];
 $avatar;
 if (isset($_SESSION['avatar'])) {
@@ -13,8 +11,6 @@ if (isset($_SESSION['avatar'])) {
 }
 
 ?>
-=======
->>>>>>> parent of c772242 (Admin added.)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +31,6 @@ $currentPage = 'iletisim';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->
-<<<<<<< HEAD
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-3">
@@ -48,9 +43,6 @@ include 'php/navbar.php';
             </div>
         </div>
     </div>
-=======
-
->>>>>>> parent of c772242 (Admin added.)
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>

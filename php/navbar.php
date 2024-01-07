@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 $button; 
 
 if (isset($_SESSION['kullaniciadi'])) {
