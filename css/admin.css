@@ -1,0 +1,15 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.h-font{
+    font-family: 'Merienda', cursive;
+}
+
+body{
+    background-image: url("../images/background/background.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

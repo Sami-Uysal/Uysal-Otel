@@ -1,5 +1,7 @@
 <?php
+session_start();
 
+$email = $_SESSION['email'];
 $avatar;
 if (isset($_SESSION['avatar'])) {
     $avatar = $_SESSION['avatar'];
@@ -37,7 +39,7 @@ include 'php/navbar.php';
             </div>
             <div class="col-md-9">
                 <h1>Kullanıcı Adı</h1>
-                <p>E-posta: kullanici@example.com</p>
+                <p>E-posta: <?php echo $email;?></p>
                 <!-- Buraya kullanıcı bilgilerini göstermek için gerekli HTML ve PHP kodlarını ekleyebilirsin -->
             </div>
         </div>
