@@ -3,6 +3,7 @@ session_start();
 require_once('baglanti.php');
 
 $_SESSION['kullaniciadi'] = "";
+$_SESSION['avatar'] = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -21,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user) {
             echo "Giriş Başarılı!";
             $_SESSION['kullaniciadi'] = $user['ad'];
+            $_SESSION['avatar'] = $user['resim_konum'];
         } else {
             echo "Email veya şifre yanlış!";
         }
