@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(function (data) {
             alert(data);
-            $('#kayitModal').modal('hide');
-            location.reload();
+            document.getElementById('kayitModal').style.display = 'none';
+            window.location.reload();
         })
         .catch(function (error) {
             console.error('Hata:', error);
@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(function (data) {
             alert(data);
-            $('#girisModal').modal('hide');
-            location.reload();
+            document.getElementById('girisModal').style.display = 'none';
+            window.location.reload();
         })
         .catch(function (error) {
             console.error('Hata:', error);
