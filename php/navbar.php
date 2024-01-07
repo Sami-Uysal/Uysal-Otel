@@ -1,3 +1,29 @@
+<?php
+session_start();
+$button; 
+
+if (isset($_SESSION['kullaniciadi'])) {
+    $kullaniciadi = $_SESSION['kullaniciadi'];
+    if($kullaniciadi === 'admin'){
+        $button = '
+        <a href="admin.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
+        <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
+        ';
+    }else 
+        $button = '
+        <a href="kullanici.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
+        <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
+        ';
+    
+} else {
+    $button = '
+    <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal" data-bs-target="#girisModal">Giriş Yap</button>
+    <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#kayitModal">Kayıt Ol</button>
+    ';
+    
+}
+?>
+
 <!-- Navbar Başlangıç -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white bg-gradient px-lg-3 py-lg-2 shadow-sm sticky-top mb-3 ">
     <div class="container-fluid">
@@ -21,12 +47,7 @@
                 </li>
             </ul>
             <div class="d-flex">
-                <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3 " data-bs-toggle="modal" data-bs-target="#girisModal">
-                    Giriş Yap
-                </button>
-                <button type="button" class="btn btn-outline-dark shadow-none " data-bs-toggle="modal" data-bs-target="#kayitModal">
-                    Kayıt Ol
-                </button>
+                <?php echo $button; ?>
             </div>
         </div>
     </div>
@@ -127,50 +148,6 @@
 </div>
 <!-- Giriş ve Kayıt Modal Bitiş -->
 
-<!-- Uyarı Scripti Başlangıç -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var kayitForm = document.querySelector('#kayitModal form');
-        var girisForm = document.querySelector('#girisModal form');
+<script src="../Project/js/navbar.js"></script>
 
-        kayitForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            var formData = new FormData(kayitForm);
 
-            fetch('../Project/php/kayit.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(function (response) {
-                return response.text();
-            })
-            .then(function (data) {
-                alert(data);
-            })
-            .catch(function (error) {
-                console.error('Hata:', error);
-            });
-        });
-
-        girisForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            var formData = new FormData(girisForm);
-
-            fetch('../Project/php/giris.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(function (response) {
-                return response.text();
-            })
-            .then(function (data) {
-                alert(data);
-            })
-            .catch(function (error) {
-                console.error('Hata:', error);
-            });
-        });
-    });
-
-</script>
-<!-- Uyarı Scripti Bitiş -->

@@ -1,5 +1,8 @@
 <?php
+session_start();
 require_once('baglanti.php');
+
+$_SESSION['kullaniciadi'] = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -16,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            echo "Giriş başarılı!";
+            echo "Giriş Başarılı!";
+            $_SESSION['kullaniciadi'] = $user['ad'];
         } else {
             echo "Email veya şifre yanlış!";
         }
@@ -24,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Bağlantı Hatası: " . $e->getMessage();
     }
 }
+
 ?>
 
 
