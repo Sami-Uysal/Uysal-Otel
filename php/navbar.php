@@ -45,40 +45,6 @@ if (isset($_SESSION['kullaniciadi'])) {
                 <li class="nav-item">
                     <a class="nav-link <?php if($currentPage === 'hakkimizda') echo 'active'; ?> me-2" <?php if($currentPage === 'hakkimizda') echo 'aria-current="page"'; ?> href="hakkimizda.php">Hakkımızda</a>
                 </li>
-                <?php if($currentPage === 'kullanici') echo '<li class="nav-item">
-                    <a class="nav-link active me-2" aria-current="page" href="kullanici.php">Profil</a>
-                </li>'; ?>
-                <?php 
-                if(isset($kullaniciadi) && $kullaniciadi === 'admin'){
-                    $active = '';
-                    $active2 = '';
-                    $active3 = '';
-                    if($currentPage === 'admin'){ 
-                        $active = 'active'; 
-                        $active2 = ''; 
-                        $active3 = '';
-                    } elseif($currentPage === 'rezervasyon'){ 
-                        $active = ''; 
-                        $active2 = 'active'; 
-                        $active3 = '';
-                    } elseif($currentPage === 'oda'){ 
-                        $active = ''; 
-                        $active2 = ''; 
-                        $active3 = 'active';
-                    }
-                    echo '<li class="nav-item">
-                            <a class="nav-link '. $active .' me-2" href="admin.php">Admin Paneli</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link '. $active2 .' me-2" href="rezervasyon.php">Rezervasyon Düzenle</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link '. $active3 .' me-2" href="oda.php">Oda Ekle</a>
-                          </li>';
-                }
-                else echo '';
-                ?>
-                <li class="nav-item">
             </ul>
             <div class="d-flex">
                 <?php echo $button; ?>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 session_start();
 
@@ -12,6 +13,8 @@ if (isset($_SESSION['avatar'])) {
 }
 
 ?>
+=======
+>>>>>>> parent of c772242 (Admin added.)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,10 +31,11 @@ if (isset($_SESSION['avatar'])) {
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'kullanici';
+$currentPage = 'iletisim';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->
+<<<<<<< HEAD
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-3">
@@ -44,9 +48,13 @@ include 'php/navbar.php';
             </div>
         </div>
     </div>
+=======
+
+>>>>>>> parent of c772242 (Admin added.)
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="js/iletisim.js"></script>
 
 </html>

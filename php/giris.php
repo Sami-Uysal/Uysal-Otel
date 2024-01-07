@@ -3,8 +3,11 @@
 require_once('baglanti.php');
 
 $_SESSION['kullaniciadi'] = "";
+<<<<<<< HEAD
 $_SESSION['avatar'] = "";
 $_SESSION['email'] = "";
+=======
+>>>>>>> parent of c772242 (Admin added.)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -23,8 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user) {
             echo "Giriş Başarılı!";
             $_SESSION['kullaniciadi'] = $user['ad'];
+<<<<<<< HEAD
             $_SESSION['avatar'] = $user['resim_konum'];
             $_SESSION['email'] = $user['email'];
+=======
+>>>>>>> parent of c772242 (Admin added.)
         } else {
             echo "Email veya şifre yanlış!";
         }
