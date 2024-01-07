@@ -37,7 +37,7 @@
 <div class="modal fade" id="girisModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="../Project/php/giris.php" method="POST">
+            <form action="../Project/php/giris.php" class="form" method="POST">
                 <div class="modal-header ">
                     <h5 class="modal-title d-flex align-items-center">
                         <i class="bi bi-person fs-3 me-2 "></i> Giriş
@@ -63,10 +63,10 @@
     </div>
 </div>
 
-<div class="modal fade"id="kayitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="kayitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="../Project/php/kayit.php" method="POST" >
+            <form action="../Project/php/kayit.php" class="form" method="POST" enctype="multipart/form-data">
                 <div class="modal-header ">
                     <h5 class="modal-title d-flex align-items-center">
                         <i class="bi bi-person-add fs-3 me-2"></i>Kayıt
@@ -126,3 +126,51 @@
     </div>
 </div>
 <!-- Giriş ve Kayıt Modal Bitiş -->
+
+<!-- Uyarı Scripti Başlangıç -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var kayitForm = document.querySelector('#kayitModal form');
+        var girisForm = document.querySelector('#girisModal form');
+
+        kayitForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var formData = new FormData(kayitForm);
+
+            fetch('../Project/php/kayit.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (data) {
+                alert(data);
+            })
+            .catch(function (error) {
+                console.error('Hata:', error);
+            });
+        });
+
+        girisForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var formData = new FormData(girisForm);
+
+            fetch('../Project/php/giris.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (data) {
+                alert(data);
+            })
+            .catch(function (error) {
+                console.error('Hata:', error);
+            });
+        });
+    });
+
+</script>
+<!-- Uyarı Scripti Bitiş -->
