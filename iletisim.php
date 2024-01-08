@@ -26,8 +26,11 @@ include 'php/navbar.php';
         </div>
     </div>
 </div>
+<?php
+include 'php/iletisimmail.php';
+?>
 
-<form action="php/iletisimmail.php" method="post" class="contact-form form">
+<form action="" method="post" class="contact-form form">
     <div class="form-group">
         <label for="ad">Adınız:</label><br>
         <input type="text" id="ad" name="ad" required>
@@ -48,6 +51,5 @@ include 'php/navbar.php';
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="js/iletisim.js"></script>
 
 </html>

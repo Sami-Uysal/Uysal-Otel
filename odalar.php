@@ -21,6 +21,26 @@ include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->
 
+<!-- Bağlantı -->
+<?php
+$sunucuadi = "localhost";
+$kadi = "root";
+$sifre = "";
+$vtadi = "uysalotel"; 
+
+try {
+    $conn = new PDO("mysql:host=$sunucuadi;dbname=$vtadi", $kadi, $sifre);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $conn->prepare("SELECT * FROM odalar");
+    $stmt->execute();
+    $odalar = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch(PDOException $e) {
+    echo "Bağlantı hatası: " . $e->getMessage();
+}
+?>
+<!-- Bağlantı Bitiş -->
+
 <div class="container mb-3">
     <div class="row">
         <div class="bg-white shadow rounded">
@@ -29,57 +49,24 @@ include 'php/navbar.php';
     </div>
 </div>
 
-<!-- Odalar Başlangıç -->
+<!-- Odalar Listesi -->
 <main style="margin: 0;">
-  <section class="room col-lg-3 mb-3">
-    <img src="images/rooms/delux.png" alt="Oda 1">
-    <h2>Oda 1</h2>
-    <p class="description">Rahat ve ferah bir oda.</p>
-    <p class="price">Gecelik fiyat: $100</p>
-    <button class="book-btn">Rezervasyon Yap</button>
-  </section>
-
-  <section class="room col-lg-3 mb-3">
-    <img src="images/rooms/delux.png" alt="Oda 2">
-    <h2>Oda 2</h2>
-    <p class="description">Manzaralı bir oda.</p>
-    <p class="price">Gecelik fiyat: $150</p>
-    <button class="book-btn">Rezervasyon Yap</button>
-  </section>
-
-  <section class="room col-lg-3 mb-3">
-    <img src="images/rooms/delux.png" alt="Oda 1">
-    <h2>Oda 1</h2>
-    <p class="description">Rahat ve ferah bir oda.</p>
-    <p class="price">Gecelik fiyat: $100</p>
-    <button class="book-btn">Rezervasyon Yap</button>
-  </section>
-
-  <section class="room col-lg-3 mb-3">
-    <img src="images/rooms/delux.png" alt="Oda 2">
-    <h2>Oda 2</h2>
-    <p class="description">Manzaralı bir oda.</p>
-    <p class="price">Gecelik fiyat: $150</p>
-    <button class="book-btn">Rezervasyon Yap</button>
-  </section>
-
-  <section class="room col-lg-3 mb-3">
-    <img src="images/rooms/delux.png" alt="Oda 1">
-    <h2>Oda 1</h2>
-    <p class="description">Rahat ve ferah bir oda.</p>
-    <p class="price">Gecelik fiyat: $100</p>
-    <button class="book-btn">Rezervasyon Yap</button>
-  </section>
-
-  <section class="room col-lg-3 mb-3">
-    <img src="images/rooms/delux.png" alt="Oda 2">
-    <h2>Oda 2</h2>
-    <p class="description">Manzaralı bir oda.</p>
-    <p class="price">Gecelik fiyat: $150</p>
-    <button class="book-btn">Rezervasyon Yap</button>
-  </section>
-
+  <?php
+  if (!empty($odalar)) {
+      foreach ($odalar as $oda) {
+          echo "<section class='room col-lg-3 mb-3'>";
+          echo "<br>"."<img src='images/rooms/{$oda['oda_resim']}' alt='{$oda['oda_adi']}'>"."<br>";
+          echo "<br>"."<h2>{$oda['oda_adi']}</h2>"."<br>";
+          echo "<br>"."<p class='description'>{$oda['oda_aciklamasi']}</p>"."<br>";
+          echo "<br>"."<p class='price'>Gecelik fiyat: {$oda['oda_fiyat']}</p>"."<br>";
+          echo "</section>";
+      }
+  } else {
+      echo "Odalar bulunamadı.";
+  }
+  ?>
 </main>
+<!-- Odalar Listesi Bitiş -->
      
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  

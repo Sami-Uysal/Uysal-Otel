@@ -14,6 +14,7 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
+error_reporting(0);
 $currentPage = 'index';
 include 'php/navbar.php';
 ?>
@@ -35,21 +36,24 @@ include 'php/navbar.php';
 </div>
 <!-- Carousel Bitiş -->
 
+
+<!-- Oda Arama Başlangıç  -->
 <div class="container">
     <div class="row">
         <div class="col-lg-12 bg-white shadow p-4 rounded">
             <h5 class="modal-title mb-4 d-flex align-items-center">
                 <i class="bi bi-ticket-fill fs-1 me-2"></i> Bilet Alma
             </h5>
-            <form method="POST" action="php/odaarama.php">
+            <form method="POST" action="">
                 <div class="row align-items-end">
+
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Başlangıç</label>
-                        <input type="date" class="form-control shadow-none" name="baslangic_tarihi">
+                        <input type="date" class="form-control shadow-none" name="baslangic_tarihi" pattern="\d{4}-\d{2}-\d{2}">
                     </div>
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Bitiş</label>
-                        <input type="date" class="form-control shadow-none" name="bitis_tarihi">
+                        <input type="date" class="form-control shadow-none" name="bitis_tarihi" pattern="\d{4}-\d{2}-\d{2}">
                     </div>
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Yetişkin</label>
@@ -74,6 +78,11 @@ include 'php/navbar.php';
             </form>
         </div>
     </div>
+</div>
+<!-- Oda Arama Bitiş  -->
+
+<div class="row mt-4 justify-content-center">
+        <?php include 'php/odaarama.php'; ?>
 </div>
 
 </body>

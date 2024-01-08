@@ -1,34 +1,52 @@
-*{
-    font-family: 'Open Sans', sans-serif;
+* {
+  font-family: 'Open Sans', sans-serif;
 }
 
-.h-font{
-    font-family: 'Merienda', cursive;
+.h-font {
+  font-family: 'Merienda', cursive;
 }
 
-body{
-    background-image: url("../images/background/background.png");
-    height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+body {
+  background-image: url("../images/background/background.png");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
+/* Rest of your CSS remains the same */
 
 main {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-top: 20px;
 }
 
 .room {
-  width: 300px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
   padding: 15px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 992px) {
+  .room {
+    width: calc(50% - 20px); 
+  }
+}
+
+@media (max-width: 576px) {
+  .room {
+    width: 100%; 
+    margin-right: 0;
+  }
+}
+
+.room:nth-child(3n+1) {
+  margin-right: 0;
 }
 
 .room img {
@@ -36,44 +54,12 @@ main {
   border-radius: 8px;
   margin-bottom: 10px;
 }
-
-.room h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.room p {
-  margin-bottom: 10px;
-}
-
-.price {
+.fiyat {
   font-weight: bold;
 }
 
-.book-btn {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.description {
+  display: block;
+  clear: both;
 }
 
-.book-btn:hover {
-  background-color: #555;
-}
-
-.room {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.col-lg-3 {
-  margin-bottom: 20px;
-  margin-right: 20px;
-}
-
-.room:nth-child(4n+1) {
-  margin-right: 0;
-}

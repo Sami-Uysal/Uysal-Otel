@@ -1,6 +1,8 @@
 <?php
 session_start();
 error_reporting(0);
+
+$oda_adi = $_SESSION['oda_adi'];
 $email = $_SESSION['email'];
 $kullaniciadi = $_SESSION['kullaniciadi'];
 $avatar = '';
@@ -44,14 +46,22 @@ include 'php/navbar.php';
     </div>
     <div class="reservation">
         <h2>Rezervasyonlar</h2>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Rezervasyon #1</h5>
-                <p class="card-text">Tarih: 01/01/2024</p>
-                <p class="card-text">Otel: Örnek Otel</p>
-            </div>
-        </div>
+        <?php
+
+        foreach ($oda_adi as $index => $oda) {
+
+            $rezervasyon_tarihi = date('d/m/Y', strtotime("+ $index days")); 
+
+            echo '<div class="card">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">Rezervasyon #' . ($index + 1) . '</h5>';
+            echo '<p class="card-text">Tarih: ' . $rezervasyon_tarihi . '</p>';
+            echo '<p class="card-text">Oda: ' . $oda . '</p>';
+            echo '</div></div>';
+        }
+        ?>
     </div>
+
 </div>
 
 </body>

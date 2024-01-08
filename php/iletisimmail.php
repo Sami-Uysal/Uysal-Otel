@@ -34,9 +34,9 @@
             $mail->Body    = "Ad: $ad<br>E-posta: $email<br>Mesaj: $mesaj";
 
             $mail->send();
-            echo 'E-posta başarıyla gönderildi!';
+            echo '<script>alert("E-posta başarılı bir şekilde gönderildi. Teşekkürler! :) ");</script>';
         } catch (Exception $e) {
-            echo 'E-posta gönderilirken bir hata oluştu: ', $mail->ErrorInfo;
+            echo '<script>alert("E-posta gönderilirken bir hata oluştu:");</script>', $mail->ErrorInfo;
         }
     }
 ?>
