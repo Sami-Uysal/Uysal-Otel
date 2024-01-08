@@ -2,19 +2,37 @@
 session_start();
 error_reporting(0);
 
-$oda_adi = $_SESSION['oda_adi'];
 $email = $_SESSION['email'];
 $kullaniciadi = $_SESSION['kullaniciadi'];
 $avatar = '';
-if (isset($_SESSION['avatar'])) {
+if (isset($_SESSION['kullaniciid'])) {
+    $kullaniciid = $_SESSION['kullaniciid'];
+    if (isset($_SESSION['avatar'])){ 
     $avatar = $_SESSION['avatar'];
     $avatar = 'dosyalar/' . $avatar;
+    }
+    else $avatar = 'dosyalar/avatar.png';
 
-} else {
-    $avatar = 'dosyalar/avatar.png';
+    $sunucuadi = "localhost";
+    $kadi = "root";
+    $sifre = "";
+    $vtadi = "uysalotel"; 
+
+    try {
+        $conn = new PDO("mysql:host=$sunucuadi;dbname=$vtadi", $kadi, $sifre);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $conn->prepare("SELECT * FROM rezervasyonlar WHERE kullanici_id = :kullaniciid");
+        $stmt->bindParam(':kullaniciid', $kullaniciid);
+        $stmt->execute();
+        $rezervasyonlar = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        echo "Bağlantı hatası: " . $e->getMessage();
+    }
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,25 +65,23 @@ include 'php/navbar.php';
     <div class="reservation">
         <h2>Rezervasyonlar</h2>
         <?php
-
-        foreach ($oda_adi as $index => $oda) {
-
-            $rezervasyon_tarihi = date('d/m/Y', strtotime("+ $index days")); 
-
-            echo '<div class="card">';
-            echo '<div class="card-body">';
-            echo '<h5 class="card-title">Rezervasyon #' . ($index + 1) . '</h5>';
-            echo '<p class="card-text">Tarih: ' . $rezervasyon_tarihi . '</p>';
-            echo '<p class="card-text">Oda: ' . $oda . '</p>';
-            echo '</div></div>';
+        
+        if (!empty($rezervasyonlar)) {
+            foreach ($rezervasyonlar as $rezervasyon) {
+                echo '<div class="card">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">Rezervasyon #' . $rezervasyon['rezervasyon_id'] . '</h5>';
+                echo '<p class="card-text">Tarih: ' . $rezervasyon['rezervasyon_tarihi'] . '</p>';
+                echo '<p class="card-text">Oda ID: ' . $rezervasyon['oda_id'] . '</p>';
+                echo '</div></div>';
+            }
+        } else {
+            echo "Rezervasyon bulunamadı.";
         }
         ?>
     </div>
-
 </div>
 
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="js/iletisim.js"></script>
 </html>

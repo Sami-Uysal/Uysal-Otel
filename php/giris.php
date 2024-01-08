@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['kullaniciadi'] = $user['ad'];
             $_SESSION['avatar'] = $user['resim_konum'];
             $_SESSION['email'] = $user['email'];
+            $_SESSION['kullaniciid'] = false;
         } else {
             echo "Email veya şifre yanlış!";
             $_SESSION['basarisiz'] = true;
