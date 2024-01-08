@@ -1,0 +1,58 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.h-font{
+    font-family: 'Merienda', cursive;
+}
+
+body{
+    background-image: url("../images/background/background.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.profile h3 {
+    margin: 0;
+    color: #333;
+}
+.reservation {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.reservation h5 {
+    margin-top: 0;
+    color: #555;
+}
+.reservation p {
+    margin-bottom: 5px;
+    color: #777;
+}

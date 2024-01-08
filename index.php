@@ -35,26 +35,25 @@ include 'php/navbar.php';
 </div>
 <!-- Carousel Bitiş -->
 
-<!-- Bilet Alma Başlangıç -->
 <div class="container">
     <div class="row">
         <div class="col-lg-12 bg-white shadow p-4 rounded">
             <h5 class="modal-title mb-4 d-flex align-items-center">
                 <i class="bi bi-ticket-fill fs-1 me-2"></i> Bilet Alma
             </h5>
-            <form>
-                <div class="row align-items-end ">
+            <form method="POST" action="php/odaarama.php">
+                <div class="row align-items-end">
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Başlangıç</label>
-                        <input type="date" class="form-control shadow-none">
+                        <input type="date" class="form-control shadow-none" name="baslangic_tarihi">
                     </div>
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Bitiş</label>
-                        <input type="date" class="form-control shadow-none">
+                        <input type="date" class="form-control shadow-none" name="bitis_tarihi">
                     </div>
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Yetişkin</label>
-                        <select class="form-select shadow-none">
+                        <select class="form-select shadow-none" name="yetiskin">
                             <option value="1">1 Yetişkin</option>
                             <option value="2">2 Yetişkin</option>
                             <option value="3">3 Yetişkin</option>
@@ -62,7 +61,7 @@ include 'php/navbar.php';
                     </div>
                     <div class="col-lg-2 mb-3">
                         <label class="form-label" style="font-weight: 500;">Çocuk</label>
-                        <select class="form-select shadow-none">
+                        <select class="form-select shadow-none" name="cocuk">
                             <option value="1">1 Çocuk</option>
                             <option value="2">2 Çocuk</option>
                             <option value="3">3 Çocuk</option>
@@ -76,7 +75,6 @@ include 'php/navbar.php';
         </div>
     </div>
 </div>
-<!-- Bilet Alma Bitiş -->
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>

@@ -1,29 +1,48 @@
 <?php
 session_start();
 
-$button; 
+$button;
 
-if (isset($_SESSION['kullaniciadi'])) {
-    $kullaniciadi = $_SESSION['kullaniciadi'];
-    if($kullaniciadi === 'admin'){
+if (isset($_SESSION['basarisiz'])) {
+    $basarisiz = $_SESSION['basarisiz'];
+    if($basarisiz){
         $button = '
-        <a href="admin.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
-        <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
+        <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal" data-bs-target="#girisModal">Giriş Yap</button>
+        <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#kayitModal">Kayıt Ol</button>
         ';
-    }else 
-        $button = '
-        <a href="kullanici.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
-        <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
-        ';
-    
-} else {
+    }
+    else if (isset($_SESSION['kullaniciadi'])) {
+        $kullaniciadi = $_SESSION['kullaniciadi'];
+        if($kullaniciadi === 'admin'){
+            $button = '
+            <a href="admin.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
+            <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
+            ';
+        }else 
+            $button = '
+            <a href="kullanici.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
+            <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
+            ';
+
+    } else {
     $button = '
-    <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal" data-bs-target="#girisModal">Giriş Yap</button>
-    <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#kayitModal">Kayıt Ol</button>
-    ';
-    
+        <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal" data-bs-target="#girisModal">Giriş Yap</button>
+        <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#kayitModal">Kayıt Ol</button>
+        ';
+
+    }
 }
+else {
+    $button = '
+        <button type="button" class="btn btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal" data-bs-target="#girisModal">Giriş Yap</button>
+        <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#kayitModal">Kayıt Ol</button>
+        ';
+
+}
+
+
 ?>
+
 
 <!-- Navbar Başlangıç -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white bg-gradient px-lg-3 py-lg-2 shadow-sm sticky-top mb-3 ">
@@ -46,6 +65,32 @@ if (isset($_SESSION['kullaniciadi'])) {
                 <li class="nav-item">
                     <a class="nav-link <?php if($currentPage === 'hakkimizda') echo 'active'; ?> me-2" <?php if($currentPage === 'hakkimizda') echo 'aria-current="page"'; ?> href="hakkimizda.php">Hakkımızda</a>
                 </li>
+                <?php if($currentPage === 'kullanici') echo 
+                '<li class="nav-item">
+                    <a class="nav-link active me-2" aria-current="page" href="index.php">Profil</a>
+                </li>';?>
+                <?php 
+                if(isset($_SESSION['kullaniciadi'])){
+                    if($kullaniciadi === 'admin'){
+                        $active = '';
+                        $active2 = '';
+                        $active3 = '';
+                        if($currentPage === 'admin') $active = 'active';
+                        else if($currentPage === 'rezervasyon') $active2 = 'active';
+                        else if($currentPage === 'oda ekle') $active3 = 'active';
+                        echo 
+                        '<li class="nav-item">
+                            <a class="nav-link '.$active.' me-2" aria-current="page" href="admin.php">Admin Panel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link '.$active2.' me-2" aria-current="page" href="rezervasyonduzenle.php">Rezarvasyon Düzenleme</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link '.$active3.' me-2" aria-current="page" href="odaekle.php">Oda Ekle</a>
+                        </li>';}
+                }
+                else echo '';
+                ?>
             </ul>
             <div class="d-flex">
                 <?php echo $button; ?>
@@ -102,7 +147,7 @@ if (isset($_SESSION['kullaniciadi'])) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 ps-0 mb-3">
-                            <label class="form-label">Ad</label>
+                            <label class="form-label">Ad Soyad</label>
                             <input name="ad" type="text" class="form-control shadow-none">
                         </div>
                         <div class="col-md-6 ps-0 mb-3">

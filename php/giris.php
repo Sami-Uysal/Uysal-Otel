@@ -1,11 +1,11 @@
 <?php
-
 require_once('baglanti.php');
 session_start();
 
 $_SESSION['kullaniciadi'] = "";
 $_SESSION['avatar'] = "";
 $_SESSION['email'] = "";
+$_SESSION['basarisiz'] = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -28,7 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['email'] = $user['email'];
         } else {
             echo "Email veya şifre yanlış!";
+            $_SESSION['basarisiz'] = true;
         }
+        $conn = null;
     } catch (PDOException $e) {
         echo "Bağlantı Hatası: " . $e->getMessage();
     }

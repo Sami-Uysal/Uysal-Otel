@@ -1,18 +1,3 @@
-<?php
-session_start();
-error_reporting(0);
-$email = $_SESSION['email'];
-$kullaniciadi = $_SESSION['kullaniciadi'];
-$avatar = '';
-if (isset($_SESSION['avatar'])) {
-    $avatar = $_SESSION['avatar'];
-    $avatar = 'dosyalar/' . $avatar;
-
-} else {
-    $avatar = 'dosyalar/avatar.png';
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,39 +8,18 @@ if (isset($_SESSION['avatar'])) {
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/kullanici.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'kullanici';
+$currentPage = 'hakkimizda';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->
 
-<div class="container">
-    <div class="profile">
-        <img src="<?php echo $avatar; ?>" alt="Profil Resmi" class="img-fluid rounded-circle">
-        <div>
-            <h3><?php echo $kullaniciadi?></h3>
-            <p>E-posta: <?php echo $email;?></p>
-        </div>
-    </div>
-    <div class="reservation">
-        <h2>Rezervasyonlar</h2>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Rezervasyon #1</h5>
-                <p class="card-text">Tarih: 01/01/2024</p>
-                <p class="card-text">Otel: Örnek Otel</p>
-            </div>
-        </div>
-    </div>
-</div>
-
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="js/iletisim.js"></script>
 </html>

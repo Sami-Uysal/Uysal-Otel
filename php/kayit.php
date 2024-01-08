@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "INSERT INTO kullanicilar (ad, email, telefon, adres, zip_kodu, dogum_gunu, sifre, resim_konum) VALUES ('$ad', '$email', '$telefon', '$adres', '$zip_kodu', '$dogum_gunu', '$sifre', '$dosya')";
             $conn->exec($sql);
             echo "Kayıt başarıyla yapıldı!!!";
+            $conn = null;
         } catch (PDOException $e) {
             echo "Kayıt Hatası: " . $e->getMessage();
         }
