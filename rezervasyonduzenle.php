@@ -14,10 +14,11 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'hakkimizda';
+$currentPage = 'rezervasyonduzenle';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->
+
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>

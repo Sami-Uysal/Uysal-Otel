@@ -14,7 +14,7 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'hakkimizda';
+$currentPage = 'rezervasyon';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->

@@ -50,15 +50,15 @@ try {
 </div>
 
 <!-- Odalar Listesi -->
-<main style="margin: 0;" class="align-items-center">
+<main style="margin: 0 250px 250px 250px;">
   <?php
   if (!empty($odalar)) {
       foreach ($odalar as $oda) {
           echo "<section class='room col-lg-3 mb-3'>";
-          echo "<br>"."<img src='images/rooms/{$oda['oda_resim']}' alt='{$oda['oda_adi']}'>"."<br>";
-          echo "<br>"."<h2>{$oda['oda_adi']}</h2>"."<br>";
-          echo "<br>"."<p class='description'>{$oda['oda_aciklamasi']}</p>"."<br>";
-          echo "<br>"."<p class='price'>Gecelik fiyat: {$oda['oda_fiyat']}</p>"."<br>";
+          echo "<img src='images/rooms/{$oda['oda_resim']}' alt='{$oda['oda_adi']}'>";
+          echo "<h2>{$oda['oda_adi']}</h2>";
+          echo "<p class='description'>{$oda['oda_aciklamasi']}</p>";
+          echo "<p style='font-weight: bold;'>Gecelik fiyat: {$oda['oda_fiyat']}</p>";
           echo "</section>";
       }
   } else {

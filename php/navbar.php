@@ -71,12 +71,13 @@ else {
                 </li>';?>
                 <?php 
                 if(isset($_SESSION['kullaniciadi'])){
+                    $kullaniciadi = $_SESSION['kullaniciadi'];
                     if($kullaniciadi === 'admin'){
                         $active = '';
                         $active2 = '';
                         $active3 = '';
                         if($currentPage === 'admin') $active = 'active';
-                        else if($currentPage === 'rezervasyon') $active2 = 'active';
+                        else if($currentPage === 'rezervasyonduzenle') $active2 = 'active';
                         else if($currentPage === 'oda ekle') $active3 = 'active';
                         echo 
                         '<li class="nav-item">
