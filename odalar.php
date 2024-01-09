@@ -50,7 +50,7 @@ try {
 </div>
 
 <!-- Odalar Listesi -->
-<main style="margin: 0;">
+<main style="margin: 0;" class="align-items-center">
   <?php
   if (!empty($odalar)) {
       foreach ($odalar as $oda) {
