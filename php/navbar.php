@@ -67,7 +67,7 @@ else {
                 </li>
                 <?php if($currentPage === 'kullanici') echo 
                 '<li class="nav-item">
-                    <a class="nav-link active me-2" aria-current="page" href="index.php">Profil</a>
+                    <a class="nav-link active me-2" aria-current="page" href="kullanici.php">Profil</a>
                 </li>';?>
                 <?php 
                 if(isset($_SESSION['kullaniciadi'])){
@@ -75,23 +75,22 @@ else {
                     if($kullaniciadi === 'admin'){
                         $active = '';
                         $active2 = '';
-                        $active3 = '';
                         if($currentPage === 'admin') $active = 'active';
-                        else if($currentPage === 'rezervasyonduzenle') $active2 = 'active';
-                        else if($currentPage === 'oda ekle') $active3 = 'active';
+                        else if($currentPage === 'oda ekle') $active2 = 'active';
                         echo 
                         '<li class="nav-item">
                             <a class="nav-link '.$active.' me-2" aria-current="page" href="admin.php">Admin Panel</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link '.$active2.' me-2" aria-current="page" href="rezervasyonduzenle.php">Rezarvasyon Düzenleme</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link '.$active3.' me-2" aria-current="page" href="odaekle.php">Oda Ekle</a>
+                            <a class="nav-link '.$active2.' me-2" aria-current="page" href="odaekle.php">Oda Ekle</a>
                         </li>';}
                 }
                 else echo '';
                 ?>
+                <?php if($currentPage === 'rezervasyonduzenle') echo 
+                '<li class="nav-item">
+                    <a class="nav-link active me-2" aria-current="page" href="rezervasyonduzenle.php">Rezarvasyon Düzenleme</a>
+                </li>';?>
             </ul>
             <div class="d-flex">
                 <?php echo $button; ?>

@@ -49,11 +49,11 @@ include 'php/navbar.php';
 
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Başlangıç</label>
-                        <input type="date" class="form-control shadow-none" name="baslangic_tarihi" pattern="\d{4}-\d{2}-\d{2}">
+                        <input type="date" class="form-control shadow-none" name="baslangic_tarihi">
                     </div>
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Bitiş</label>
-                        <input type="date" class="form-control shadow-none" name="bitis_tarihi" pattern="\d{4}-\d{2}-\d{2}">
+                        <input type="date" class="form-control shadow-none" name="bitis_tarihi">
                     </div>
                     <div class="col-lg-3 mb-3">
                         <label class="form-label" style="font-weight: 500;">Yetişkin</label>
