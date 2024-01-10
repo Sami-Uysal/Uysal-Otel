@@ -49,7 +49,7 @@ if (isset($_SESSION['kullaniciid'])) {
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'kullanici';
+$busayfa = 'kullanici';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->

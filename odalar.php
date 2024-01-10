@@ -16,7 +16,7 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'odalar';
+$busayfa = 'odalar';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->
@@ -54,7 +54,7 @@ try {
   <?php
   if (!empty($odalar)) {
       foreach ($odalar as $oda) {
-          echo "<section class='room col-lg-3 mb-3'>";
+          echo "<section class='room col-lg-3 mb-3 mx-1 my-1'>";
           echo "<img src='images/rooms/{$oda['oda_resim']}' alt='{$oda['oda_adi']}'>";
           echo "<h2>{$oda['oda_adi']}</h2>";
           echo "<p class='description'>{$oda['oda_aciklamasi']}</p>";

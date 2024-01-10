@@ -14,7 +14,7 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'rezervasyon';
+$busayfa = 'rezervasyon';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->

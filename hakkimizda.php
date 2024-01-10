@@ -23,7 +23,7 @@ if (isset($_SESSION['kullaniciadi'])) {
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'hakkimizda';
+$busayfa = 'hakkimizda';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->

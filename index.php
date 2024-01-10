@@ -15,7 +15,7 @@
 <!-- Navbar  Başlangıç -->
 <?php
 error_reporting(0);
-$currentPage = 'index';
+$busayfa= 'index';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->

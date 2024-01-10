@@ -14,7 +14,7 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'iletisim';
+$busayfa = 'iletisim';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->

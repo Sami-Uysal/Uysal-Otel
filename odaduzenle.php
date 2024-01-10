@@ -14,7 +14,7 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'oda ekle';
+$busayfa = 'odaduzenle';
 include 'php/navbar.php';
 ?>
 <!-- Navbar  Bitiş -->

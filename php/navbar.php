@@ -13,12 +13,6 @@ if (isset($_SESSION['basarisiz'])) {
     }
     else if (isset($_SESSION['kullaniciadi'])) {
         $kullaniciadi = $_SESSION['kullaniciadi'];
-        if($kullaniciadi === 'admin'){
-            $button = '
-            <a href="admin.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
-            <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
-            ';
-        }else 
             $button = '
             <a href="kullanici.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
             <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
@@ -54,18 +48,18 @@ else {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link <?php if($currentPage === 'index') echo 'active'; ?> me-2" <?php if($currentPage === 'index') echo 'aria-current="page"'; ?> href="index.php">Ana Sayfa</a>
+                    <a class="nav-link <?php if($busayfa === 'index') echo 'active'; ?> me-2" <?php if($busayfa === 'index') echo 'aria-current="page"'; ?> href="index.php">Ana Sayfa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($currentPage === 'odalar') echo 'active'; ?> me-2" <?php if($currentPage === 'odalar') echo 'aria-current="page"'; ?> href="odalar.php">Odalar</a>
+                    <a class="nav-link <?php if($busayfa === 'odalar') echo 'active'; ?> me-2" <?php if($busayfa === 'odalar') echo 'aria-current="page"'; ?> href="odalar.php">Odalar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($currentPage === 'iletisim') echo 'active'; ?> me-2" <?php if($currentPage === 'iletisim') echo 'aria-current="page"'; ?> href="iletisim.php">İletişim</a>
+                    <a class="nav-link <?php if($busayfa === 'iletisim') echo 'active'; ?> me-2" <?php if($busayfa === 'iletisim') echo 'aria-current="page"'; ?> href="iletisim.php">İletişim</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($currentPage === 'hakkimizda') echo 'active'; ?> me-2" <?php if($currentPage === 'hakkimizda') echo 'aria-current="page"'; ?> href="hakkimizda.php">Hakkımızda</a>
+                    <a class="nav-link <?php if($busayfa === 'hakkimizda') echo 'active'; ?> me-2" <?php if($busayfa === 'hakkimizda') echo 'aria-current="page"'; ?> href="hakkimizda.php">Hakkımızda</a>
                 </li>
-                <?php if($currentPage === 'kullanici') echo 
+                <?php if($busayfa === 'kullanici') echo 
                 '<li class="nav-item">
                     <a class="nav-link active me-2" aria-current="page" href="kullanici.php">Profil</a>
                 </li>';?>
@@ -75,21 +69,23 @@ else {
                     if($kullaniciadi === 'admin'){
                         $active = '';
                         $active2 = '';
-                        if($currentPage === 'admin') $active = 'active';
-                        else if($currentPage === 'oda ekle') $active2 = 'active';
+                        if($busayfa === 'admin') $active = 'active';
+                        else if($busayfa === 'oda ekle') $active2 = 'active';
                         echo 
                         '<li class="nav-item">
                             <a class="nav-link '.$active.' me-2" aria-current="page" href="admin.php">Admin Panel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link '.$active2.' me-2" aria-current="page" href="odaekle.php">Oda Ekle</a>
-                        </li>';}
+                        </li>';
+                        }
                 }
                 else echo '';
                 ?>
-                <?php if($currentPage === 'rezervasyonduzenle') echo 
+                <?php if($busayfa === 'rezervasyonduzenle') echo 
                 '<li class="nav-item">
                     <a class="nav-link active me-2" aria-current="page" href="rezervasyonduzenle.php">Rezarvasyon Düzenleme</a>
+                </li>';?>
+                <?php if($busayfa === 'odeduzenle') echo
+                '<li class="nav-item">
+                    <a class="nav-link active me-2" aria-current="page" href="odaekle.php">Oda Düzenleme</a>
                 </li>';?>
             </ul>
             <div class="d-flex">

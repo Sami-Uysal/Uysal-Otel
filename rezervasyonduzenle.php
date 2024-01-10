@@ -34,7 +34,7 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
-$currentPage = 'rezervasyonduzenle';
+$busayfa = 'rezervasyonduzenle';
 include 'php/navbar.php'; 
 ?>
 <!-- Navbar  Bitiş -->
