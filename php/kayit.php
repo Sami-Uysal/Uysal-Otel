@@ -1,44 +1,63 @@
 <?php
-require_once ('baglanti.php');
+require_once('baglanti.php');
+session_start();
+
+$_SESSION['oda_adi'] = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $ad = $_POST['ad'];
-    $email = $_POST['email'];
-    $telefon = $_POST['phone'];
-    $adres = $_POST['adres'];
-    $zip_kodu = $_POST['zip_kodu'];
-    $dogum_gunu = $_POST['dogum_gunu'];
-    $sifre = $_POST['sifre'];
-    $sifreDogrula = $_POST['sifre_dogrula'];
 
-    if ($sifre !== $sifreDogrula) {
-        echo "Şifreler eşleşmiyor. Lütfen aynı şifreyi girin.";
-    } else {
-        try {
-            $dosyaAdi = uniqid() . '_' . $_FILES["resim"]["name"];
-            $dosyaYolu = "../dosyalar/" . $dosyaAdi;
-            move_uploaded_file($_FILES["resim"]["tmp_name"], $dosyaYolu);
+    $baslangic_tarihi = date("Y-m-d", strtotime($_POST['baslangic_tarihi']));
+    $bitis_tarihi = date("Y-m-d", strtotime($_POST['bitis_tarihi']));
+
+    try {
+        if ($conn) {
+            $sql = "SELECT * FROM odalar WHERE oda_id NOT IN (
+                SELECT DISTINCT oda_id FROM rezervasyonlar 
+                WHERE (baslangic_tarihi BETWEEN :baslangic_tarihi_param AND :bitis_tarihi_param)
+                OR (bitis_tarihi BETWEEN :baslangic_tarihi_param AND :bitis_tarihi_param)
+                OR (baslangic_tarihi < :baslangic_tarihi_param AND bitis_tarihi > :bitis_tarihi_param)
+            )";
     
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO kullanicilar (ad, email, telefon, adres, zip_kodu, dogum_gunu, sifre, resim_konum) VALUES (:ad, :email, :telefon, :adres, :zip_kodu, :dogum_gunu, :sifre, :dosya)";
             $stmt = $conn->prepare($sql);
-    
-            $stmt->bindParam(':ad', $ad);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':telefon', $telefon);
-            $stmt->bindParam(':adres', $adres);
-            $stmt->bindParam(':zip_kodu', $zip_kodu);
-            $stmt->bindParam(':dogum_gunu', $dogum_gunu);
-            $stmt->bindParam(':sifre', $sifre);
-            $stmt->bindParam(':dosya', $dosyaAdi);
+            $stmt->bindParam(':baslangic_tarihi_param', $baslangic_tarihi);
+            $stmt->bindParam(':bitis_tarihi_param', $bitis_tarihi);
     
             $stmt->execute();
-            echo "Kayıt başarıyla yapıldı!!!";
+
+            if ($stmt->rowCount() > 0) {
+                $counter = 0;
+                echo '<div class="row justify-content-center">';
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<div class="col-lg-4 mb-3">';
+                    echo '<div class="card">';
+                    echo '<div class="card-body">';
+                    echo "<h5 class='card-title'>Oda Resmi: " . $row["oda_resim"] . "</h5>";
+                    echo "<p class='card-text'>Oda Adı: " . $row["oda_adi"] . "</p>";
+                    echo '<img src="../images/rooms/' . $row["oda_resim"] . '" alt="' . $row["oda_adi"] . '" class="img-fluid">';
+            
+                    echo '<a href="#" class="btn btn-primary">Bu Odayı Seç</a>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    $counter++;
+  
+                    if ($counter % 3 === 0) {
+                        echo '</div><div class="row justify-content-center">'; 
+                    }
+                }
+                echo '</div>';
+            } else {
+                echo '<div class="col-lg-12">';
+                echo '<p>Uygun oda bulunamadı.</p>';
+                echo '</div>';
+            }        
+
             $conn = null;
-        } catch (PDOException $e) {
-            echo "Kayıt Hatası: " . $e->getMessage();
+        } else {
+            echo "Bağlantı hatası.";
         }
+    } catch (PDOException $e) {
+        echo "Bağlantı Hatası: " . $e->getMessage();
     }
 }
 ?>
-

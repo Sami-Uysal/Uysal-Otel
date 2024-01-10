@@ -1,3 +1,11 @@
+<?php
+require_once('php/baglanti.php');
+session_start();
+if (isset($_SESSION['kullaniciid'])) {
+    $kullaniciid = $_SESSION['kullaniciid'];
+}
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +22,6 @@
 
 <!-- Navbar  Başlangıç -->
 <?php
-error_reporting(0);
 $busayfa= 'index';
 include 'php/navbar.php';
 ?>
@@ -44,7 +51,7 @@ include 'php/navbar.php';
             <h5 class="modal-title mb-4 d-flex align-items-center">
                 <i class="bi bi-ticket-fill fs-1 me-2"></i> Bilet Alma
             </h5>
-            <form method="POST" action="">
+            <form method="POST" action="" id="form">
                 <div class="row align-items-end">
 
                     <div class="col-lg-3 mb-3">
@@ -72,7 +79,7 @@ include 'php/navbar.php';
                         </select>
                     </div>
                     <div class="col-lg-1 mt-2 mb-lg-3">
-                        <input type="submit" class="btn btn-dark text-white shadow-none" value="Ara">
+                        <input type="submit" class="btn btn-dark text-white shadow-none" name="ara" value="Ara">
                     </div>
                 </div>
             </form>
@@ -81,9 +88,122 @@ include 'php/navbar.php';
 </div>
 <!-- Oda Arama Bitiş  -->
 
+<!-- Oda Listesi Başlangıç  -->
 <div class="row mt-4 justify-content-center">
-        <?php include 'php/odaarama.php'; ?>
+        <?php
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ara'])) {
+
+            $baslangic_tarihi = date("Y-m-d", strtotime($_POST['baslangic_tarihi']));
+            $bitis_tarihi = date("Y-m-d", strtotime($_POST['bitis_tarihi']));
+
+            try {
+                if ($conn) {
+  
+                    $sql = "SELECT oda_id, oda_resim, oda_adi FROM odalar WHERE oda_id NOT IN (
+                            SELECT DISTINCT oda_id FROM rezervasyonlar 
+                            WHERE (baslangic_tarihi BETWEEN :baslangic_tarihi_param AND :bitis_tarihi_param)
+                            OR (bitis_tarihi BETWEEN :baslangic_tarihi_param AND :bitis_tarihi_param)
+                            OR (baslangic_tarihi < :baslangic_tarihi_param AND bitis_tarihi > :bitis_tarihi_param)
+                        )";
+
+                    $stmt = $conn->prepare($sql);
+
+                    $stmt->bindParam(':baslangic_tarihi_param', $baslangic_tarihi);
+                    $stmt->bindParam(':bitis_tarihi_param', $bitis_tarihi);
+
+                    $stmt->execute();
+
+                    if ($stmt->rowCount() > 0) {
+
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<div class="col-lg-4 mb-3">';
+                            echo '<div class="card">';
+                            echo '<div class="card-body">';
+                            echo '<img src="../Project/images/rooms/' . $row["oda_resim"] . '" alt="' . $row["oda_adi"] . '" class="card-img-top">';
+                            echo "<h5 class='card-text'>" . $row["oda_adi"] . "</h5>";
+
+                            echo '<form method="POST" action="">';
+                            echo '<input type="hidden" name="oda_id" value="' . $row["oda_id"] . '">';
+                            echo '<input type="hidden" name="kullanici_id" value="' . $kullaniciid . '">';
+                            echo '<input type="hidden" name="baslangic_tarihi" value="' . $baslangic_tarihi . '">';
+                            echo '<input type="hidden" name="bitis_tarihi" value="' . $bitis_tarihi . '">';
+                            echo '<button type="submit" class="btn btn-primary" name="ekle">Bu Odayı Seç</button>';
+                            echo '</form>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<div class="col-lg-12">';
+                        echo '<p>Uygun oda bulunamadı.</p>';
+                        echo '</div>';
+                    }
+
+                    $conn = null;
+                } else {
+                    echo "<script>alert('Bağlantı hatası.')</script>";
+                    echo '<script>window.location.replace("index.php");</script>';
+                }
+            } catch (PDOException $e) {
+                echo "Bağlantı Hatası: " . $e->getMessage();
+            }
+        }
+        ?>
 </div>
+<!-- Oda Listesi Bitiş  -->
+
+<!-- Rezervasyon Oluştur Başlangıç  -->
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ekle'])) {
+    $oda_id = $_POST['oda_id'];
+    $kullanici_id = $_POST['kullanici_id'];
+    $baslangic_tarihi = $_POST['baslangic_tarihi'];
+    $bitis_tarihi = $_POST['bitis_tarihi'];
+
+    try {
+        $sql = "INSERT INTO rezervasyonlar (oda_id, kullanici_id, baslangic_tarihi, bitis_tarihi) VALUES (:oda_id, :kullanici_id, :baslangic_tarihi, :bitis_tarihi)";
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bindParam(':oda_id', $oda_id);
+        $stmt->bindParam(':kullanici_id', $kullanici_id);
+        $stmt->bindParam(':baslangic_tarihi', $baslangic_tarihi);
+        $stmt->bindParam(':bitis_tarihi', $bitis_tarihi);
+
+        if ($stmt->execute()) {
+            echo "<script>alert('Yeni rezervasyon oluşturuldu.'); window.location.href = 'kullanici.php';</script>";
+        } else {
+            echo "<script>alert('Veritabanına eklerken bir hata oluştu.')</script>";
+        }
+    } catch (PDOException $e) {
+        echo "Bağlantı Hatası: " . $e->getMessage();
+    }
+}
+?>
+<!-- Rezervasyon Oluştur Bitiş  -->
+
+
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('form');
+        form.addEventListener('submit', function(event) {
+            const baslangicTarih = document.querySelector('input[name="baslangic_tarihi"]').value;
+            const bitisTarih = document.querySelector('input[name="bitis_tarihi"]').value;
+
+            if (baslangicTarih === '' || bitisTarih === '') {
+                event.preventDefault();
+                alert('Lütfen başlangıç ve bitiş tarihini seçiniz.');
+                location.reload();
+            }
+        });
+    });
+</script>
+
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>

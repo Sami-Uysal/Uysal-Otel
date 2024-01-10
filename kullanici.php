@@ -7,12 +7,13 @@ $kullaniciadi = $_SESSION['kullaniciadi'];
 $avatar = '';
 if (isset($_SESSION['kullaniciid'])) {
     $kullaniciid = $_SESSION['kullaniciid'];
+    
     if (isset($_SESSION['avatar'])){ 
-    $avatar = $_SESSION['avatar'];
-    $avatar = 'dosyalar/' . $avatar;
-    }
+        $avatar = $_SESSION['avatar'];
+        $avatar = 'dosyalar/' . $avatar;
+        }
     else $avatar = 'dosyalar/avatar.png';
-
+    
     $sunucuadi = "localhost";
     $kadi = "root";
     $sifre = "";
@@ -21,8 +22,11 @@ if (isset($_SESSION['kullaniciid'])) {
     try {
         $conn = new PDO("mysql:host=$sunucuadi;dbname=$vtadi", $kadi, $sifre);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $stmt = $conn->prepare("SELECT * FROM rezervasyonlar WHERE kullanici_id = :kullaniciid");
+    
+        $stmt = $conn->prepare("SELECT rezervasyonlar.rezervasyon_id, rezervasyonlar.baslangic_tarihi, odalar.oda_adi 
+                               FROM rezervasyonlar 
+                               INNER JOIN odalar ON rezervasyonlar.oda_id = odalar.oda_id
+                               WHERE rezervasyonlar.kullanici_id = :kullaniciid");
         $stmt->bindParam(':kullaniciid', $kullaniciid);
         $stmt->execute();
         $rezervasyonlar = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,6 +36,7 @@ if (isset($_SESSION['kullaniciid'])) {
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,14 +70,13 @@ include 'php/navbar.php';
     <div class="reservation">
         <h2>Rezervasyonlar</h2>
         <?php
-        
         if (!empty($rezervasyonlar)) {
             foreach ($rezervasyonlar as $rezervasyon) {
                 echo '<div class="card">';
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title">Rezervasyon #' . $rezervasyon['rezervasyon_id'] . '</h5>';
-                echo '<p class="card-text">Tarih: ' . $rezervasyon['rezervasyon_tarihi'] . '</p>';
-                echo '<p class="card-text">Oda ID: ' . $rezervasyon['oda_id'] . '</p>';
+                echo '<p class="card-text">Tarih: ' . $rezervasyon['baslangic_tarihi'] . '</p>';
+                echo '<p class="card-text">Oda Adı: ' . $rezervasyon['oda_adi'] . '</p>'; 
                 echo '</div></div>';
             }
         } else {
@@ -81,6 +85,7 @@ include 'php/navbar.php';
         ?>
     </div>
 </div>
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

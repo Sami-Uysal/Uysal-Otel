@@ -5,6 +5,7 @@ session_start();
 $_SESSION['kullaniciadi'] = "";
 $_SESSION['avatar'] = "";
 $_SESSION['email'] = "";
+$_SESSION['kullaniciid'] = "";
 $_SESSION['basarisiz'] = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,14 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':sifre', $sifre);
         $stmt->execute();
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $kullanici = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user) {
+        if ($kullanici) {
             echo "Giriş Başarılı!";
-            $_SESSION['kullaniciadi'] = $user['ad'];
-            $_SESSION['avatar'] = $user['resim_konum'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['kullaniciid'] = false;
+            $_SESSION['kullaniciadi'] = $kullanici['ad'];
+            $_SESSION['avatar'] = $kullanici['resim_konum'];
+            $_SESSION['email'] = $kullanici['email'];
+            $_SESSION['kullaniciid'] = $kullanici['id'];
         } else {
             echo "Email veya şifre yanlış!";
             $_SESSION['basarisiz'] = true;
