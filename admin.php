@@ -138,19 +138,21 @@ $reservasyonlar = $conn->query($sql);
     <div class="card">
         <div class="card-body">
             <h1>Tüm Odalar</h1>
-            <div class="row">
+            <div class="row row-cols-1 row-cols-lg-3 g-4">
                 <?php
                 $odalar = $conn->query("SELECT * FROM odalar");
                 if (!empty($odalar)) {
                     foreach ($odalar as $oda) {
                         ?>
-                        <div class="col-lg-4 mb-4">
-                            <div class="card">
+                        <div class="col mb-4">
+                            <div class="card h-100">
                                 <img src="images/rooms/<?php echo $oda['oda_resim']; ?>" class="card-img-top" alt="<?php echo $oda['oda_adi']; ?>">
                                 <div class="card-body">
                                     <h4 class="card-title"><?php echo $oda['oda_adi']; ?></h4>
                                     <p class="card-text"><?php echo $oda['oda_aciklamasi']; ?></p>
                                     <p class="card-text" style='font-weight: bold;'>Gecelik fiyat: <?php echo $oda['oda_fiyat']; ?></p>
+                                    <p class="card-text">Oda Tipi: <?php echo $oda['oda_tipi']; ?></p>
+                                    <p class="card-text">Kapasite: <?php echo $oda['oda_kapasitesi']; ?></p>
                                     <form action="" method="POST">
                                         <a href="odaduzenle.php?id=<?php echo $oda['oda_id']; ?>" class="btn btn-dark">Düzenle</a>
                                         <input type="hidden" name="id" value="<?php echo $oda['oda_id']; ?>">
@@ -172,6 +174,8 @@ $reservasyonlar = $conn->query($sql);
         </div>
     </div>
 </div>
+
+
 
 <!-- Modal for Adding New Room -->
 <div class="modal fade" id="yeniOdaModal" tabindex="-1" aria-labelledby="yeniOdaModalLabel" aria-hidden="true">
@@ -266,8 +270,9 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sil'])) {
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['odaekle'])) {
 
-    move_uploaded_file($_FILES["oda_resim"]["tmp_name"], "images/rooms/" . $_FILES["oda_resim"]["name"]);
-    $oda_resim = $_FILES["oda_resim"]["name"];
+
+    $dosyaAdi = uniqid() . "_" . $_FILES["oda_resim"]["name"];
+    move_uploaded_file($_FILES["oda_resim"]["tmp_name"], "images/rooms/" . $dosyaAdi);
 
     $oda_adi = $_POST['oda_adi'];
     $oda_aciklama = $_POST['oda_aciklama'];
@@ -283,7 +288,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['odaekle'])) {
     $stmt->bindParam(':oda_adi', $oda_adi);
     $stmt->bindParam(':oda_aciklama', $oda_aciklama);
     $stmt->bindParam(':oda_fiyat', $oda_fiyat);
-    $stmt->bindParam(':oda_resim', $oda_resim);
+    $stmt->bindParam(':oda_resim', $dosyaAdi);
     $stmt->bindParam(':oda_tipi', $oda_tipi);
     $stmt->bindParam(':oda_kapasitesi', $oda_kapasitesi);
 

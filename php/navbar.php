@@ -13,6 +13,12 @@ if (isset($_SESSION['basarisiz'])) {
     }
     else if (isset($_SESSION['kullaniciadi'])) {
         $kullaniciadi = $_SESSION['kullaniciadi'];
+        if($kullaniciadi === 'admin'){
+            $button = '
+            <a href="admin.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
+            <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
+            ';
+        }else 
             $button = '
             <a href="kullanici.php" class="btn btn-primary shadow-none me-lg-2 me-3 "> <i class="bi bi-person-fill"></i> ' . $kullaniciadi . '</a>
             <a href="../Project/php/cikis.php" class="btn btn-outline-dark shadow-none">Çıkış Yap</a>
@@ -70,12 +76,10 @@ else {
                         $active = '';
                         $active2 = '';
                         if($busayfa === 'admin') $active = 'active';
-                        else if($busayfa === 'oda ekle') $active2 = 'active';
                         echo 
                         '<li class="nav-item">
                             <a class="nav-link '.$active.' me-2" aria-current="page" href="admin.php">Admin Panel</a>
-                        </li>';
-                        }
+                        </li>';}
                 }
                 else echo '';
                 ?>
@@ -83,7 +87,7 @@ else {
                 '<li class="nav-item">
                     <a class="nav-link active me-2" aria-current="page" href="rezervasyonduzenle.php">Rezarvasyon Düzenleme</a>
                 </li>';?>
-                <?php if($busayfa === 'odeduzenle') echo
+                <?php if($busayfa === 'odaduzenle') echo
                 '<li class="nav-item">
                     <a class="nav-link active me-2" aria-current="page" href="odaekle.php">Oda Düzenleme</a>
                 </li>';?>

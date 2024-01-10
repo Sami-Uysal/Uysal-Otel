@@ -15,12 +15,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Şifreler eşleşmiyor. Lütfen aynı şifreyi girin.";
     } else {
         try {
-            move_uploaded_file($_FILES["resim"]["tmp_name"], "../dosyalar/" . $_FILES["resim"]["name"]);
-            $dosya = $_FILES["resim"]["name"];
-
+            $dosyaAdi = uniqid() . '_' . $_FILES["resim"]["name"];
+            $dosyaYolu = "../dosyalar/" . $dosyaAdi;
+            move_uploaded_file($_FILES["resim"]["tmp_name"], $dosyaYolu);
+    
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO kullanicilar (ad, email, telefon, adres, zip_kodu, dogum_gunu, sifre, resim_konum) VALUES ('$ad', '$email', '$telefon', '$adres', '$zip_kodu', '$dogum_gunu', '$sifre', '$dosya')";
-            $conn->exec($sql);
+            $sql = "INSERT INTO kullanicilar (ad, email, telefon, adres, zip_kodu, dogum_gunu, sifre, resim_konum) VALUES (:ad, :email, :telefon, :adres, :zip_kodu, :dogum_gunu, :sifre, :dosya)";
+            $stmt = $conn->prepare($sql);
+    
+            $stmt->bindParam(':ad', $ad);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':telefon', $telefon);
+            $stmt->bindParam(':adres', $adres);
+            $stmt->bindParam(':zip_kodu', $zip_kodu);
+            $stmt->bindParam(':dogum_gunu', $dogum_gunu);
+            $stmt->bindParam(':sifre', $sifre);
+            $stmt->bindParam(':dosya', $dosyaAdi);
+    
+            $stmt->execute();
             echo "Kayıt başarıyla yapıldı!!!";
             $conn = null;
         } catch (PDOException $e) {
@@ -29,3 +41,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+

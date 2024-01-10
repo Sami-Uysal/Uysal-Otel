@@ -50,21 +50,27 @@ try {
 </div>
 
 <!-- Odalar Listesi -->
-<main style="margin: 0 250px 250px 250px;">
-  <?php
-  if (!empty($odalar)) {
-      foreach ($odalar as $oda) {
-          echo "<section class='room col-lg-3 mb-3 mx-1 my-1'>";
-          echo "<img src='images/rooms/{$oda['oda_resim']}' alt='{$oda['oda_adi']}'>";
-          echo "<h2>{$oda['oda_adi']}</h2>";
-          echo "<p class='description'>{$oda['oda_aciklamasi']}</p>";
-          echo "<p style='font-weight: bold;'>Gecelik fiyat: {$oda['oda_fiyat']}</p>";
-          echo "</section>";
-      }
-  } else {
-      echo "Odalar bulunamadı.";
-  }
-  ?>
+<main class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+        <?php
+        if (!empty($odalar)) {
+            foreach ($odalar as $oda) {
+                echo "<div class='col'>";
+                echo "<div class='h-100 room mb-3 mx-5'>";
+                echo "<img src='images/rooms/{$oda['oda_resim']}' class='card-img-top' alt='{$oda['oda_adi']}'>";
+                echo "<div class='card-body'>";
+                echo "<h5 class='card-title'>{$oda['oda_adi']}</h5>";
+                echo "<p class='card-text'>{$oda['oda_aciklamasi']}</p>";
+                echo "<p class='card-text' style='font-weight: bold;'>Gecelik fiyat: {$oda['oda_fiyat']}</p>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+            }
+        } else {
+            echo "<p>Odalar bulunamadı.</p>";
+        }
+        ?>
+    </div>
 </main>
 <!-- Odalar Listesi Bitiş -->
      
