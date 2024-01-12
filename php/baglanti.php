@@ -12,7 +12,7 @@ try {
 }
 catch(PDOException $e)
 {
-echo $sql . "<br>" . $e->getMessage();
+  echo "Bağlantı Hatası: " . $e->getMessage();
 }
 
 ?>
