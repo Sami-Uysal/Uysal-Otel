@@ -16,17 +16,21 @@
         $mail = new PHPMailer(true);
 
         try {
+
+            //Gönderen mail adresi ve şifresi
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'uysalotel.iletisim@gmail.com';
-            $mail->Password   = 'kfvx poqh yudp jitl';
+            $mail->Username   = '@gmail.com';
+            $mail->Password   = '';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
-            $mail->setFrom('uysalotel.iletisim@gmail.com', 'Uysal Iletisim');
+            //Gönderen mail adresi
+            $mail->setFrom('@gmail.com', 'Uysal Iletisim');
 
-            $mail->addAddress('uysalotel.iletisim@gmail.com', 'Iletisim');
+            //Alıcı mail adresi
+            $mail->addAddress('@gmail.com', 'Iletisim');
 
             $mail->isHTML(true);
             $mail->Subject = 'Iletisim Formu';
